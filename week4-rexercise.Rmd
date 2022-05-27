@@ -1,0 +1,61 @@
+---
+title: "week4-rexercise"
+output: html_document
+date: '2022-05-27'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Input of Task 4
+
+Create a function:
+First create a function with no input:
+```{r}
+testfun <- function(){}
+testfun()
+## NULL
+
+class(testfun)
+## [1] "function"
+```
+To make the function actually do something, we need to specify what should be done within the curly brackets {}. The following function always prints the same statement and accepts no input values:
+```{r}
+testfun <- function(){print("this function does nothing")}
+
+testfun()
+```
+If we want the function to accept some input values, we have to define them within the round brackets. For example, I specify a variable named sometext and can call this variable within the execution.
+```{r}
+testfun <- function(sometext){print(sometext)}
+
+testfun(sometext = "this function does slightly more, but still not much")
+```
+Let’s take a more practical example. Say we want a function that calculates our age if provided with the date of our birthday. We can use Sys.time() to provide today’s date and difftime() to calculate the time difference between today and our birthday.
+```{r}
+my_age <- function(birthday, units){
+  difftime(Sys.time(),birthday, units = units)
+  }
+
+my_age(birthday = "1997-04-01", units = "days")
+```
+As we already know from using other functions, if we declare our variables in the order that we initially listed them, we do not need to specify the parameters (no need of birthday = and units =).
+```{r}
+my_age("1997-04-01","days")
+```
+If we want any of our parameters to have default value, we can assign an initial value to the parameter when declaring the variables within the round brackets.
+```{r}
+my_age <- function(birthday, units = "days"){
+  difftime(Sys.time(),birthday, units = units)
+  }
+
+# if not stated otherwise, our function uses the unit "days"
+my_age("1997-04-01")
+
+
+# We can still overwrite units
+my_age("1997-04-01", "hours")
+```
+
+Task 1: Create a function for calculation of euclidian distance.
